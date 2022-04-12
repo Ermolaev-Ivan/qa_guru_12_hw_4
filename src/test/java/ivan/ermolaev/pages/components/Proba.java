@@ -1,23 +1,26 @@
 package ivan.ermolaev.pages.components;
 
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
 public class Proba {
     public static void main(String[] args){
-        List<String> subjectsList = Arrays.asList(
-                "Maths", "Accounting", "Arts", "Social Studies",
-                "English", "Chemistry", "Hindi", "Computer Science", "Commerce", "Economics",
-                "History", "Physics", "Biology", "Civics");
+//        List<String> subjectsList = Arrays.asList(
+//                "Maths", "Accounting", "Arts", "Social Studies",
+//                "English", "Chemistry", "Hindi", "Computer Science", "Commerce", "Economics",
+//                "History", "Physics", "Biology", "Civics");
+        ArrayList<String> listString = new ArrayList<>()
         System.out.println("Размер до " + subjectsList.size());
         System.out.println("Выводим то что удалим " + subjectsList.get(1));
-        try {
-            subjectsList.remove("Accounting");
-            subjectsList.remove(1);
-        }
-        catch (Exception E){
-            System.out.println("исключение");
-        }
+        subjectsList.remove(0);
+//        try {
+//            subjectsList.remove("Accounting");
+//            subjectsList.remove(1);
+//        }
+//        catch (Exception E){
+//            System.out.println("исключение");
+//        }
 
         System.out.println("Размер после " + subjectsList.size());
 
@@ -39,4 +42,8 @@ public class Proba {
         }
         return newArr;
     }
-}
+
+
+    }
+
+
