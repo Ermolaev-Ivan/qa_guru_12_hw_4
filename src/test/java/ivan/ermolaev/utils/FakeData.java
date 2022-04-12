@@ -10,10 +10,22 @@ public class FakeData {
 
     Faker faker = new Faker();
     static String randomGender(){
+        // Передаелать на словарь, в значения записать стокой числа и прокидывать их в локатор, вынести в пейджи
         String[] genders = new String[] {"Male", "Female", "Other"};
         int randomNumber = (int) (Math.random() * genders.length);
         return genders[randomNumber];
     }
+    static String randomCheckboxes(){
+        String[] checkboxs = new String[] {"Sports", "Reading", "Music"};
+        int randomNumber = (int) (Math.random() * checkboxs.length);
+        return checkboxs[randomNumber];
+    }
+    static String randomValueOfArray(String[] arr){
+        int randomNumber = (int) (Math.random() * arr.length);
+        return arr[randomNumber];
+    }
+
+    String[] ssa = new String[] {"Sports", "Reading", "Music"};
 //    default data
 //    static String firstName = "Gordon";
 //    static String lastName = "Freeman";
@@ -29,6 +41,9 @@ public class FakeData {
     String phone = faker.phoneNumber().subscriberNumber(10);
     String fullAddress = faker.address().fullAddress();
     String gender = randomGender();
+    String hobbyCheckboxes = randomCheckboxes();
+//    String state = randomValueOfArray(["Sports", "Reading", "Music"]);
+
 
 
 
