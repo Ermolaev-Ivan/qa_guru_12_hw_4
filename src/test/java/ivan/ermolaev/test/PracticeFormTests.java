@@ -1,11 +1,13 @@
 package ivan.ermolaev.test;
 
 import com.codeborne.selenide.Configuration;
+import ivan.ermolaev.pages.RegistrationPage;
+import ivan.ermolaev.utils.FakeData;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
 
 import static com.codeborne.selenide.Condition.*;
-import static com.codeborne.selenide.Selectors.byText;
+
 import static com.codeborne.selenide.Selenide.*;
 
 public class PracticeFormTests {
@@ -18,39 +20,29 @@ public class PracticeFormTests {
     @Test
     void formTest() {
         open("https://demoqa.com/automation-practice-form");
+        RegistrationPage registrationPage = new RegistrationPage();
+        FakeData fakeData = new FakeData();
 
-        $("#firstName").setValue("Gordon");
-        $("#lastName").setValue("Freeman");
-        $("#userEmail").setValue("freeman_g@black.mesa");
-//        $("label[for='gender-radio-1']").click();
-        $("div.custom-radio>label.custom-control-label").$(byText("Other")).click();
-        $("#userNumber").setValue("9998887766");
-        $("#subjectsInput").setValue("Physics").pressEnter();
+        registrationPage
+                .openPage()
+                .setFirstName(fakeData.firstName)
+                .setLastName(fakeData.lastName)
+                .setEmail(fakeData.email)
+                .randomChoiceGender()
+                .setPhone(fakeData.phone)
+                .setBirthDate("19","November","1998")
+                .setSubjects("Hindi")
+                .randomHobbyCheckbox()
+                .uploadPicture("Gordon.jpg")
+                .setCurrentAddress(fakeData.fullAddress)
+                .setState("Rajasthan")
+                .setCity("Jaiselmer")
+                .sendFormButton()
+                .validationForm(fakeData.firstName, fakeData.lastName, fakeData.email,
 
-// Date of Birth
-        $("#dateOfBirthInput").click();
-        $(".react-datepicker__month-select").selectOptionContainingText("November");
-        $(".react-datepicker__year-select").selectOptionContainingText("1998");
-        $(".react-datepicker__day--019" ).click();
+                );
 
-// Checkboxes
-        $(byText("Sports")).click();
-        $(byText("Reading")).click();
-        $(byText("Music")).click();
 
-// Picture
-        $("input[id='uploadPicture']").uploadFromClasspath("Gordon.jpg");
-
-// State and city
-        $("#currentAddress").setValue("10400 Northeast Fourth Street Floor 14 Bellevue, WA 98004 USA");
-        $("#react-select-3-input").setValue("Rajasthan").pressEnter();
-        $("#react-select-4-input").setValue("Jaiselmer").pressEnter();
-
-// Send form
-        $("#submit").scrollTo().click();
-
-// Validation form
-        $("#example-modal-sizes-title-lg").shouldBe(visible);
         $(".table").shouldHave(text("Gordon Freeman"),
                 text("freeman_g@black.mesa"),
                 text("Male"),
@@ -61,9 +53,9 @@ public class PracticeFormTests {
                 text("Gordon.jpg"),
                 text("10400 Northeast Fourth Street Floor 14 Bellevue, WA 98004 USA"),
                 text("Rajasthan Jaiselmer"));
-
-// Close form
-        $("#closeLargeModal").click();
-        $("#example-modal-sizes-title-lg").shouldNotBe(visible);
+//
+//// Close form
+//        $("#closeLargeModal").click();
+//        $("#example-modal-sizes-title-lg").shouldNotBe(visible);
     }
 }
