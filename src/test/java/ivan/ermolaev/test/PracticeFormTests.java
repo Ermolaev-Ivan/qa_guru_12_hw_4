@@ -6,10 +6,6 @@ import ivan.ermolaev.utils.FakeData;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
 
-import static com.codeborne.selenide.Condition.*;
-
-import static com.codeborne.selenide.Selenide.*;
-
 public class PracticeFormTests {
 
     @BeforeAll
@@ -19,14 +15,13 @@ public class PracticeFormTests {
 
     @Test
     void formTest() {
-        open("https://demoqa.com/automation-practice-form");
         RegistrationPage registrationPage = new RegistrationPage();
         FakeData fakeData = new FakeData();
 
         String firstName = fakeData.firstName,
                 lastName = fakeData.lastName,
                 email = fakeData.email,
-                gender = "random",
+                gender = "Male",
                 phone = fakeData.phone,
                 day = "19",
                 mount = "November",
@@ -36,9 +31,9 @@ public class PracticeFormTests {
                 state = "Rajasthan",
                 city = "Jaiselmer",
                 picture = "Gordon.jpg",
-                hobby = "random";
+                hobby = "Sports";
 
-
+/// допилить валидацию, прокидывать осознано гендары/хобби и предметы
 
 
         registrationPage
@@ -56,8 +51,9 @@ public class PracticeFormTests {
                 .setState(state)
                 .setCity(city)
                 .sendFormButton()
-                .validationForm(firstName, lastName, email, gender, phone, day, mount, year,
-                        subjects, hobby, picture, currentAdress, state, city)
+                .validationForm(firstName, lastName, email, gender, phone,
+                        day, mount, year, subjects, hobby, picture,
+                        currentAdress, state, city)
                 .closeModal();
 
     }

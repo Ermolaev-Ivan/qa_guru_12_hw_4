@@ -8,8 +8,7 @@ import static com.codeborne.selenide.Condition.visible;
 import static com.codeborne.selenide.Selectors.byText;
 import static com.codeborne.selenide.Selenide.$;
 import static com.codeborne.selenide.Selenide.open;
-import static ivan.ermolaev.utils.FakeData.randomCheckboxes;
-import static ivan.ermolaev.utils.FakeData.randomGender;
+
 
 public class RegistrationPage {
 
@@ -66,14 +65,8 @@ public class RegistrationPage {
     }
 
     public RegistrationPage choiceGender(String gender){
-        if (gender.equals("random")){
-            genderRadio.$(byText(randomGender())).click();
-            return this;
-        }
-        else {
             genderRadio.$(byText(gender)).click();
             return this;
-        }
     }
 
     public RegistrationPage setPhone(String phone){
@@ -87,14 +80,10 @@ public class RegistrationPage {
     }
 
     public RegistrationPage choiceHobbyCheckbox(String hobby){
-        if (hobby.equals("random")){
-            hobbiesCheckbox.$(byText(randomCheckboxes())).click();
-            return this;}
-        else {
             hobbiesCheckbox.$(byText(hobby)).click();
             return this;
-        }
     }
+
 
     public RegistrationPage uploadPicture(String namePicture){
         uploadPictureInput.uploadFromClasspath(namePicture);
@@ -143,8 +132,6 @@ public class RegistrationPage {
                 text(picture),
                 text(address),
                 text(state + " " + sity));
-        closeLargeModalButton.click();
-        modalForm.shouldNotBe(visible);
         return this;
     }
 
