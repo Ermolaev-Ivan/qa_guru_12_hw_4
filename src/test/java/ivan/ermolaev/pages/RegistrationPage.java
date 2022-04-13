@@ -65,9 +65,15 @@ public class RegistrationPage {
         return this;
     }
 
-    public RegistrationPage randomChoiceGender(){
-        genderRadio.$(byText(randomGender())).click();
-        return this;
+    public RegistrationPage choiceGender(String gender){
+        if (gender.equals("random")){
+            genderRadio.$(byText(randomGender())).click();
+            return this;
+        }
+        else {
+            genderRadio.$(byText(gender)).click();
+            return this;
+        }
     }
 
     public RegistrationPage setPhone(String phone){
@@ -80,9 +86,14 @@ public class RegistrationPage {
         return this;
     }
 
-    public RegistrationPage randomHobbyCheckbox(){
-        hobbiesCheckbox.$(byText(randomCheckboxes())).click();
-        return this;
+    public RegistrationPage choiceHobbyCheckbox(String hobby){
+        if (hobby.equals("random")){
+            hobbiesCheckbox.$(byText(randomCheckboxes())).click();
+            return this;}
+        else {
+            hobbiesCheckbox.$(byText(hobby)).click();
+            return this;
+        }
     }
 
     public RegistrationPage uploadPicture(String namePicture){
@@ -112,11 +123,13 @@ public class RegistrationPage {
 
     public RegistrationPage closeModal(){
         closeLargeModalButton.scrollTo().click();
+        modalForm.shouldNotBe(visible);
         return this;
     }
 
     public RegistrationPage validationForm(String firstName, String lastName, String email,
-                                           String gender, String phone, String data,
+                                           String gender, String phone, String day,
+                                           String month, String year,
                                            String subject, String hobby, String picture,
                                            String address, String state, String sity){
         modalForm.shouldBe(visible);
@@ -124,7 +137,7 @@ public class RegistrationPage {
                 text(email),
                 text(gender),
                 text(phone),
-                text("19 November,1998"),
+                text(day + " " + month + "," + year),
                 text(subject),
                 text(hobby),
                 text(picture),

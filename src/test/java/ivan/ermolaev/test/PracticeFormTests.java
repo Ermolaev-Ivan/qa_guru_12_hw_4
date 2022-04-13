@@ -23,39 +23,42 @@ public class PracticeFormTests {
         RegistrationPage registrationPage = new RegistrationPage();
         FakeData fakeData = new FakeData();
 
+        String firstName = fakeData.firstName,
+                lastName = fakeData.lastName,
+                email = fakeData.email,
+                gender = "random",
+                phone = fakeData.phone,
+                day = "19",
+                mount = "November",
+                year = "1998",
+                subjects = "Hindi",
+                currentAdress = fakeData.fullAddress,
+                state = "Rajasthan",
+                city = "Jaiselmer",
+                picture = "Gordon.jpg",
+                hobby = "random";
+
+
+
+
         registrationPage
                 .openPage()
-                .setFirstName(fakeData.firstName)
-                .setLastName(fakeData.lastName)
-                .setEmail(fakeData.email)
-                .randomChoiceGender()
-                .setPhone(fakeData.phone)
-                .setBirthDate("19","November","1998")
-                .setSubjects("Hindi")
-                .randomHobbyCheckbox()
-                .uploadPicture("Gordon.jpg")
-                .setCurrentAddress(fakeData.fullAddress)
-                .setState("Rajasthan")
-                .setCity("Jaiselmer")
+                .setFirstName(firstName)
+                .setLastName(lastName)
+                .setEmail(email)
+                .choiceGender(gender)
+                .setPhone(phone)
+                .setBirthDate(day, mount, year)
+                .setSubjects(subjects)
+                .choiceHobbyCheckbox(hobby)
+                .uploadPicture(picture)
+                .setCurrentAddress(currentAdress)
+                .setState(state)
+                .setCity(city)
                 .sendFormButton()
-                .validationForm(fakeData.firstName, fakeData.lastName, fakeData.email,
+                .validationForm(firstName, lastName, email, gender, phone, day, mount, year,
+                        subjects, hobby, picture, currentAdress, state, city)
+                .closeModal();
 
-                );
-
-
-        $(".table").shouldHave(text("Gordon Freeman"),
-                text("freeman_g@black.mesa"),
-                text("Male"),
-                text("9998887766"),
-                text("19 November,1998"),
-                text("Physics"),
-                text("Sports, Reading, Music"),
-                text("Gordon.jpg"),
-                text("10400 Northeast Fourth Street Floor 14 Bellevue, WA 98004 USA"),
-                text("Rajasthan Jaiselmer"));
-//
-//// Close form
-//        $("#closeLargeModal").click();
-//        $("#example-modal-sizes-title-lg").shouldNotBe(visible);
     }
 }
